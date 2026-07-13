@@ -1,161 +1,177 @@
-# Vehicle Rental and Reservation Subsystem (VRRS)
+# ATLAS/LOCAL Travel Discovery
 
-Web application for **SwitchWheels Enterprise** (Huye) to manage customers, fleet vehicles, reservations/rentals, and reporting.
+A responsive travel discovery interface for exploring restaurants, hotels, and attractions around a destination. The current project is a frontend prototype built with React, Vite, and Tailwind CSS.
 
-## Stack
+## Current Status
 
-| Layer | Technology | Port |
-|-------|------------|------|
-| Frontend | React + Vite + Tailwind | **5180** |
-| Backend | Express + Mongoose + express-session | **5560** |
-| Database | MongoDB **VRRS** | — |
-
-## Quick start
-
-```bash
-cd vrrs/backend && cp .env.example .env && npm install && npm run dev
-cd vrrs/frontend && npm install && npm run dev
-```
-
-Open http://localhost:5180 — login: `admin` / `admin123`
+The repository currently contains the frontend application. Place information and map positions use local sample data so the interface can be developed before live travel APIs and a backend are connected.
 
 ## Features
 
-| Feature | Implementation |
-|---------|----------------|
-| MongoDB database **VRRS** | `backend/config/db.js` |
-| ERD with PK/FK | Below |
-| Level 0 DFD | Below |
-| CRUD + search | Customers, vehicles, reservations, users |
-| Session login | Cookie `vrrs.sid`, `withCredentials` |
-| Roles | admin, manager, staff |
-| Report | `GET /api/reports/reservation-rental` |
+- Search-oriented navigation header
+- Restaurant, hotel, and attraction categories
+- Open-status and rating filter controls
+- Scrollable nearby-place results
+- Interactive result and map-marker selection
+- Selected-place information panel
+- Rating, pricing, distance, address, and opening-hour details
+- Map mode, fullscreen, layers, location, and zoom controls
+- Responsive mobile and desktop layouts
+- Accessible labels and keyboard-compatible buttons
 
----
+> **Note:** The current map is a styled prototype and does not yet use live geographic data. Search, directions, persistence, and external API calls are planned integrations.
 
-## Entity Relationship Diagram (ERD)
+## Technology Stack
 
-```mermaid
-erDiagram
-  CUSTOMERS ||--o{ RESERVATION_RENTALS : "makes"
-  VEHICLES ||--o{ RESERVATION_RENTALS : "involves"
-  USERS ||--o{ RESERVATION_RENTALS : "records"
+| Area | Technology |
+|---|---|
+| UI | React 19 |
+| Build tool | Vite 8 |
+| Styling | Tailwind CSS 4 |
+| Icons | Material UI Icons |
+| HTTP client | Axios |
+| Map packages | React Google Maps API and Google Map React |
+| Routing dependency | React Router DOM |
 
-  CUSTOMERS {
-    int customer_id PK
-    varchar full_name
-    varchar national_id UK
-    varchar phone
-    varchar email
-    varchar address
-  }
+## Getting Started
 
-  VEHICLES {
-    int vehicle_id PK
-    varchar plate_number UK
-    varchar brand
-    varchar model
-    int year
-    varchar vehicle_type
-    decimal purchase_price
-    enum status
-  }
+### Prerequisites
 
-  RESERVATION_RENTALS {
-    int reservation_rental_id PK
-    date reservation_date
-    date start_date
-    date end_date
-    enum reservation_status
-    date rental_date
-    date return_date
-    decimal rental_fee
-    enum rental_status
-    int customer_id FK
-    int vehicle_id FK
-    int user_id FK
-  }
+- Node.js 20 or newer
+- npm
 
-  USERS {
-    int user_id PK
-    varchar user_name UK
-    varchar password
-    enum role
-  }
+### Installation
+
+From the repository directory:
+
+```bash
+cd frontend
+npm install
 ```
 
-### Relationships
+### Development
 
-1. **Customer (1) — (M) Reservation_Rental**
-2. **Vehicle (1) — (M) Reservation_Rental**
-3. **User (1) — (M) Reservation_Rental**
-
----
-
-## Level 0 DFD
-
-External entities: **Customer**, **User**, **Manager**
-
-| Process | Data stores |
-|---------|-------------|
-| 1.0 Manage Customers | D1 Customers |
-| 2.0 Manage Vehicles | D2 Vehicles |
-| 3.0 Manage Reservation/Rental | D1, D2, D3 |
-| 4.0 Generate Reports | D1, D2, D3 |
-| 5.0 User Authentication | D4 Users |
-
-```mermaid
-flowchart TB
-  Cust["Customer"]
-  User["User"]
-  Mgr["Manager"]
-  P1(("1.0 Manage Customers"))
-  P2(("2.0 Manage Vehicles"))
-  P3(("3.0 Manage Reservation/Rental"))
-  P4(("4.0 Generate Reports"))
-  P5(("5.0 Authentication"))
-  D1[("D1 Customers")]
-  D2[("D2 Vehicles")]
-  D3[("D3 Reservations")]
-  D4[("D4 Users")]
-  Rpt["Reservation Rental Report"]
-
-  Cust --> P1 --> D1
-  User --> P2 --> D2
-  User --> P3
-  P3 --> D1
-  P3 --> D2
-  P3 --> D3
-  User --> P5 --> D4
-  Mgr --> P4
-  D1 --> P4
-  D2 --> P4
-  D3 --> P4
-  P4 --> Rpt
+```bash
+npm run dev
 ```
 
----
+Open [http://localhost:5180](http://localhost:5180) in your browser.
 
-## API
+### Production Build
 
-| Method | Endpoint |
-|--------|----------|
-| POST | `/api/auth/login` |
-| POST | `/api/auth/logout` |
-| GET | `/api/auth/me` |
-| CRUD | `/api/customers`, `/api/vehicles`, `/api/reservations` |
-| GET | `*/search?q=` |
-| CRUD | `/api/users` (admin) |
-| GET | `/api/reports/reservation-rental` (manager/admin) — full report |
-| GET | `/api/reports?startDate=&endDate=` (manager/admin) — report by date |
-
----
-
-## Project structure
-
+```bash
+npm run build
 ```
-vrrs/
+
+The production output is generated in `frontend/dist`.
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+## Project Structure
+
+```text
+vrrs-app/
 ├── README.md
-├── backend/          ← MongoDB (database VRRS)
 └── frontend/
+    ├── index.html
+    ├── package.json
+    ├── vite.config.js
+    └── src/
+        ├── App.jsx
+        ├── index.css
+        ├── main.jsx
+        └── components/
+            ├── Header/
+            │   └── Header.jsx
+            ├── List/
+            │   └── List.jsx
+            ├── Map/
+            │   └── Map.jsx
+            └── PlaceDetails/
+                └── PlaceDetails.jsx
 ```
+
+## Application Architecture
+
+`App.jsx` owns the selected-place and category state. It provides the place data and event handlers to the list and map components.
+
+| Component | Responsibility |
+|---|---|
+| `Header` | Branding, destination search, and global search controls |
+| `List` | Categories, filters, result list, and place selection |
+| `Map` | Map surface, markers, labels, and map controls |
+| `PlaceDetails` | Information and actions for the selected place |
+
+Selecting a place in `List` or selecting its marker in `Map` updates the shared state in `App`, which then updates `PlaceDetails`.
+
+## Styling
+
+Tailwind is loaded globally from `src/index.css`:
+
+```css
+@import "tailwindcss";
+```
+
+The main desktop layout uses a fixed discovery sidebar and a flexible map area. On smaller screens, these sections stack vertically. Flexbox is used for component-level alignment, while absolute positioning is used for markers, controls, and the details panel over the map.
+
+## Planned Integrations
+
+### Travel APIs
+
+- Live place search and place details
+- Geographic coordinates and map tiles
+- Directions and travel-time calculations
+- Weather forecasts
+- Current opening hours, prices, photos, and ratings
+
+### Backend
+
+A backend will be required to:
+
+- Protect private API keys
+- Authenticate users
+- Save favorite places and trips
+- Normalize data from multiple travel services
+- Validate and store generated itineraries
+- Apply rate limiting and request validation
+
+Private keys must never be placed in frontend source code or committed to Git.
+
+### AI Itinerary Generation
+
+The planned itinerary service will accept details such as destination, dates, budget, interests, group size, travel pace, and accessibility needs. The backend will combine verified place and routing data, send it to an AI provider, validate the structured response, and return a day-by-day itinerary to the frontend.
+
+Potential itinerary features include:
+
+- Day-by-day timelines
+- Route-aware activity ordering
+- Budget and opening-hour constraints
+- Meal and rest periods
+- Activity replacement and regeneration
+- Saved trips and PDF export
+
+## Environment Variables
+
+When external services are added, keep secrets in backend environment variables. A frontend variable prefixed with `VITE_` is included in the browser bundle and must not contain a private secret.
+
+Example future backend environment file:
+
+```env
+AI_API_KEY=replace_with_private_key
+MAPS_API_KEY=replace_with_private_key
+DATABASE_URL=replace_with_database_url
+```
+
+Do not commit `.env` files. Commit an `.env.example` containing placeholder names only.
+
+## Available Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the Vite development server on port 5180 |
+| `npm run build` | Create an optimized production build |
+| `npm run preview` | Preview the production build locally |
