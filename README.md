@@ -1,6 +1,6 @@
-# ATLAS/LOCAL Travel Discovery
+# ShubhYatra - Travel Advisor App
 
-A responsive travel discovery interface for exploring restaurants, hotels, and attractions around a destination. The current project is a frontend prototype built with React, Vite, and Tailwind CSS.
+A responsive travel advisor application for discovering restaurants, hotels, and attractions around a destination. The current project is a frontend prototype built with React, Vite, and Tailwind CSS.
 
 ## Current Status
 
