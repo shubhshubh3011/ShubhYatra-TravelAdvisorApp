@@ -5,9 +5,9 @@ import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
 const Header = () => (
   <header className="border-b border-[#d9e0e7] bg-[#111a24] text-white">
     <div className="mx-auto flex h-auto min-h-16 w-full max-w-[1800px] flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:px-6 sm:py-0">
-      <a href="#" className="flex shrink-0 items-center gap-2" aria-label="Atlas home">
+      <a href="#" className="flex shrink-0 items-center gap-2" aria-label="ShubhYatra home">
         <span className="flex size-9 items-center justify-center bg-[#c9ff5b] text-[#111a24]"><ExploreOutlinedIcon fontSize="small" /></span>
-        <span className="text-base font-bold">ShubhYatra<span className="text-[#c9ff5b]">/LOCAL</span></span>
+        <span className="text-base font-bold">ShubhYatra<span className="text-[#c9ff5b]">/TRAVEL</span></span>
       </a>
       <div className="relative w-full sm:ml-auto sm:max-w-xl">
         <SearchRoundedIcon className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[#9eabb8]" fontSize="small" />
