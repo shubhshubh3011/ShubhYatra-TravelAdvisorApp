@@ -1,8 +1,18 @@
 import { useState } from 'react';
-import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
-import StarRoundedIcon from '@mui/icons-material/StarRounded';
 
 const categories = ['All', 'Restaurants', 'Hotels', 'Attractions'];
+
+const ChevronDownIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="m6 9 6 6 6-6" />
+  </svg>
+);
+
+const StarIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="m12 2.8 2.7 5.5 6 .9-4.4 4.3 1 6-5.3-2.8-5.3 2.8 1-6L3.3 9.2l6-.9L12 2.8Z" />
+  </svg>
+);
 
 const List = ({ places, selectedId, onSelect, category, onCategoryChange }) => {
   const [minimumRating, setMinimumRating] = useState(0);
@@ -21,8 +31,8 @@ const List = ({ places, selectedId, onSelect, category, onCategoryChange }) => {
           ))}
         </div>
         <div className="mt-3 grid grid-cols-2 gap-2">
-          <button type="button" className="flex h-10 items-center justify-between border border-[#d9e0e7] bg-white px-3 text-xs font-semibold text-[#34414e]">Open now <KeyboardArrowDownRoundedIcon fontSize="small" /></button>
-          <button type="button" onClick={() => setMinimumRating(minimumRating === 4.7 ? 0 : 4.7)} className={`flex h-10 items-center justify-between border px-3 text-xs font-semibold ${minimumRating ? 'border-[#c9ff5b] bg-[#f4ffdc]' : 'border-[#d9e0e7] bg-white'}`}>Rating 4.7+ <KeyboardArrowDownRoundedIcon fontSize="small" /></button>
+          <button type="button" className="flex h-10 items-center justify-between border border-[#d9e0e7] bg-white px-3 text-xs font-semibold text-[#34414e]">Open now <ChevronDownIcon className="h-4 w-4" /></button>
+          <button type="button" onClick={() => setMinimumRating(minimumRating === 4.7 ? 0 : 4.7)} className={`flex h-10 items-center justify-between border px-3 text-xs font-semibold ${minimumRating ? 'border-[#c9ff5b] bg-[#f4ffdc]' : 'border-[#d9e0e7] bg-white'}`}>Rating 4.7+ <ChevronDownIcon className="h-4 w-4" /></button>
         </div>
       </div>
       <div className="flex items-center justify-between border-b border-[#d9e0e7] px-5 py-3 text-xs">
@@ -39,7 +49,7 @@ const List = ({ places, selectedId, onSelect, category, onCategoryChange }) => {
                 <span className="min-w-0 flex-1">
                   <span className={`block truncate text-sm font-bold ${selected ? 'text-white' : 'text-[#18222d]'}`}>{place.name}</span>
                   <span className={`mt-1 block text-xs ${selected ? 'text-[#aeb8c2]' : 'text-[#73808d]'}`}>{place.subtype} · {place.distance}</span>
-                  <span className="mt-2 flex items-center gap-1 text-xs"><StarRoundedIcon className="text-[#efb93f]" sx={{ fontSize: 16 }} /> <b>{place.rating}</b><span className={selected ? 'text-[#7f8c98]' : 'text-[#9aa5af]'}>· {place.price}</span></span>
+                  <span className="mt-2 flex items-center gap-1 text-xs"><StarIcon className="h-4 w-4 text-[#efb93f]" /> <b>{place.rating}</b><span className={selected ? 'text-[#7f8c98]' : 'text-[#9aa5af]'}>· {place.price}</span></span>
                 </span>
                 <span className={`mt-1 text-xs font-bold uppercase ${selected ? 'text-[#c9ff5b]' : 'text-[#8a96a1]'}`}>{place.type.slice(0, 3)}</span>
               </button>

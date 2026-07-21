@@ -1,8 +1,42 @@
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import CropFreeRoundedIcon from '@mui/icons-material/CropFreeRounded';
-import LayersOutlinedIcon from '@mui/icons-material/LayersOutlined';
-import MyLocationRoundedIcon from '@mui/icons-material/MyLocationRounded';
-import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
+const AddIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M12 5v14" />
+    <path d="M5 12h14" />
+  </svg>
+);
+
+const CropFreeIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M8 3H5a2 2 0 0 0-2 2v3" />
+    <path d="M16 3h3a2 2 0 0 1 2 2v3" />
+    <path d="M8 21H5a2 2 0 0 1-2-2v-3" />
+    <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
+  </svg>
+);
+
+const LayersIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="m12 3 9 5-9 5-9-5 9-5Z" />
+    <path d="m3 12 9 5 9-5" />
+    <path d="m3 16 9 5 9-5" />
+  </svg>
+);
+
+const MyLocationIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <circle cx="12" cy="12" r="3" />
+    <path d="M12 2v3" />
+    <path d="M12 19v3" />
+    <path d="M2 12h3" />
+    <path d="M19 12h3" />
+  </svg>
+);
+
+const RemoveIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M5 12h14" />
+  </svg>
+);
 
 const Map = ({ places, selectedId, onSelect }) => (
   <div className="absolute inset-0 overflow-hidden bg-[#dfe7e5]">
@@ -15,7 +49,7 @@ const Map = ({ places, selectedId, onSelect }) => (
       <button type="button" className="h-8 px-3 text-xs font-bold text-[#65717d] hover:bg-[#f2f4f6]">Satellite</button>
     </div>
 
-    <button type="button" aria-label="Fullscreen map" className="absolute right-4 top-4 flex size-10 items-center justify-center border border-[#d5dce2] bg-white text-[#26323e] shadow-sm hover:bg-[#f2f4f6]"><CropFreeRoundedIcon fontSize="small" /></button>
+    <button type="button" aria-label="Fullscreen map" className="absolute right-4 top-4 flex size-10 items-center justify-center border border-[#d5dce2] bg-white text-[#26323e] shadow-sm hover:bg-[#f2f4f6]"><CropFreeIcon className="h-4 w-4" /></button>
 
     {places.map((place) => {
       const selected = selectedId === place.id;
@@ -32,11 +66,11 @@ const Map = ({ places, selectedId, onSelect }) => (
     <span className="absolute left-[45%] top-[50%] rotate-[18deg] text-[9px] font-bold uppercase text-[#5e8b96]">Dravyavati River</span>
 
     <div className="absolute bottom-4 right-4 flex flex-col gap-2">
-      <button type="button" aria-label="Map layers" className="flex size-10 items-center justify-center border border-[#d5dce2] bg-white text-[#26323e] shadow-sm hover:bg-[#f2f4f6]"><LayersOutlinedIcon fontSize="small" /></button>
-      <button type="button" aria-label="Use my location" className="flex size-10 items-center justify-center border border-[#d5dce2] bg-white text-[#26323e] shadow-sm hover:bg-[#f2f4f6]"><MyLocationRoundedIcon fontSize="small" /></button>
+      <button type="button" aria-label="Map layers" className="flex size-10 items-center justify-center border border-[#d5dce2] bg-white text-[#26323e] shadow-sm hover:bg-[#f2f4f6]"><LayersIcon className="h-4 w-4" /></button>
+      <button type="button" aria-label="Use my location" className="flex size-10 items-center justify-center border border-[#d5dce2] bg-white text-[#26323e] shadow-sm hover:bg-[#f2f4f6]"><MyLocationIcon className="h-4 w-4" /></button>
       <div className="border border-[#d5dce2] bg-white shadow-sm">
-        <button type="button" aria-label="Zoom in" className="flex size-10 items-center justify-center border-b border-[#d5dce2] hover:bg-[#f2f4f6]"><AddRoundedIcon fontSize="small" /></button>
-        <button type="button" aria-label="Zoom out" className="flex size-10 items-center justify-center hover:bg-[#f2f4f6]"><RemoveRoundedIcon fontSize="small" /></button>
+        <button type="button" aria-label="Zoom in" className="flex size-10 items-center justify-center border-b border-[#d5dce2] hover:bg-[#f2f4f6]"><AddIcon className="h-4 w-4" /></button>
+        <button type="button" aria-label="Zoom out" className="flex size-10 items-center justify-center hover:bg-[#f2f4f6]"><RemoveIcon className="h-4 w-4" /></button>
       </div>
     </div>
     <div className="absolute bottom-3 left-3 text-[9px] font-semibold text-[#61706d]">Map data · Jaipur urban area</div>
